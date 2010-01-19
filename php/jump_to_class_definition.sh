@@ -25,7 +25,7 @@ current_class_name = ENV['TM_SELECTED_TEXT'] unless ENV['TM_SELECTED_TEXT'].nil?
 
 current_class_name = current_class_name.gsub('/','_')  # prepare Zend classnames
 
-files = `grep "^class #{current_class_name}[{ ]" -l -n -d recurse --include=*.php #{ENV['TM_PROJECT_DIRECTORY']}`.split("\n")
+files = `grep "^class #{current_class_name}[{ ]" -n -m 1 -d recurse --include=*.php #{ENV['TM_PROJECT_DIRECTORY']}`.split("\n")
 
 abort "No includes found for class: #{current_class_name}" if files.empty?
 
@@ -37,10 +37,12 @@ else
   file = files.pop
 end
 
-if File.exists?(file)
-  TextMate.go_to :file => file
+file_name = file.split(':').first
+
+if File.exists?(file_name)
+  TextMate.go_to :file => file_name
   exit
 end
 
-puts "File not found: #{file}"
+puts "File not found: #{file_name}"
 RUBY
