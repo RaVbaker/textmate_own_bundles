@@ -23,7 +23,7 @@ ruby 3>&0 <<-'RUBY'
 current_class_name = ENV['TM_CURRENT_WORD']
 current_class_name = ENV['TM_SELECTED_TEXT'] unless ENV['TM_SELECTED_TEXT'].nil?
 
-current_class_name.gsub!('/','_')  # prepare Zend classnames
+current_class_name = current_class_name.gsub('/','_')  # prepare Zend classnames
 
 files = `grep "^class #{current_class_name}[{ ]" -l -n -d recurse --include=*.php #{ENV['TM_PROJECT_DIRECTORY']}`.split("\n")
 
