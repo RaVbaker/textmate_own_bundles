@@ -14,7 +14,7 @@
 #   
 #   
 #   @author Rafal Piekarski <ravbaker@gmail.com>
-#   @version 1.0
+#   @version 1.0.1
 
 ruby 3>&0 <<-'RUBY'
   require ENV["TM_SUPPORT_PATH"] + "/lib/ui.rb"
